@@ -22,7 +22,7 @@ Sample keymap: `nnoremap <silent> <leader>sh :ShimpToggle<cr>`
 
 ## Config
 Defaults:
-```vim
+```
 g:shimp_options = {
     headers: ['h', 'hpp'],
     sources: ['c', 'cpp', 'cc'],
@@ -34,7 +34,7 @@ g:shimp_options = {
 To add other extensions/directories, either modify `plugin/shimp.vim` or modify the options after shimp loads (e.g. put something in `after/` or manually modify `g:shimp_options`).
 
 Example:
-```vim
+```
 vim9script
 # in after/
 g:shimp_options.headers = ['h']
