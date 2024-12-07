@@ -7,7 +7,7 @@ g:shimp_options = {
     source_dirs: ['.', 'src'],
 }
 
-def ShimpSearchInPath(path: string, stem: string, target_is_source: number): bool
+def ShimpSearchInPath(path: string, stem: string, target_is_source: number, mode: string): bool
     var dirs = (target_is_source) ? g:shimp_options.source_dirs : g:shimp_options.header_dirs
     var exts = (target_is_source) ? g:shimp_options.sources : g:shimp_options.headers
     for d in dirs
@@ -19,7 +19,13 @@ def ShimpSearchInPath(path: string, stem: string, target_is_source: number): boo
             p = $'{p}/{stem}.{e}'
             if filereadable(p)
                 p = fnamemodify(p, ":~:.")
-                execute $':e {p}'
+                if mode == 'open'
+                    execute $':e {p}'
+                elseif mode == 'left' || mode == 'right'
+                    execute $':vs {p}'
+                elseif mode == 'top' || mode == 'below'
+                    execute $':split {p}'
+                endif
                 echom $'Shimp: switched to {p}'
                 return true
             endif
@@ -28,7 +34,7 @@ def ShimpSearchInPath(path: string, stem: string, target_is_source: number): boo
     return false
 enddef
 
-export def ShimpToggle()
+export def ShimpToggle(mode: string)
     var stem = expand('%:t:r')
     var ext = expand('%:e')
     var target_is_source = -1
@@ -44,11 +50,26 @@ export def ShimpToggle()
         return
     endif
 
+    var sr = &splitright
+    var sb = &splitbelow
+    if mode == 'right'
+        set splitright
+    elseif mode == 'left'
+        set nosplitright
+    elseif mode == 'below'
+        set splitbelow
+    elseif mode == 'top'
+        set nosplitbelow
+    endif
+
+    var success = false
+
     var modifier = '%:p:h'
     var path = expand(modifier)
     while true
-        if ShimpSearchInPath(path, stem, target_is_source)
-            return
+        if ShimpSearchInPath(path, stem, target_is_source, mode)
+            success = true
+            break
         endif
         modifier = modifier .. ':h'
         var new_path = expand(modifier)
@@ -57,7 +78,21 @@ export def ShimpToggle()
         endif
         path = new_path
     endwhile
-    echom "No matching header/implementation found"
+
+    if sr
+        set splitright
+    else
+        set nosplitright
+    endif
+    if sb
+        set splitbelow
+    else
+        set nosplitbelow
+    endif
+
+    if !success
+        echom "No matching header/implementation found"
+    endif
 enddef
 
-command! ShimpToggle ShimpToggle()
+command! -nargs=1 ShimpToggle ShimpToggle(<f-args>)

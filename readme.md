@@ -14,34 +14,11 @@ Plug 'ycm/shimp'
 ## Usage
 
 ```vim
-:ShimpToggle
-```
-(no other features)
-
-Sample keymap: `nnoremap <silent> <leader>sh :ShimpToggle<cr>`
-
-## Config
-Defaults:
-```
-g:shimp_options = {
-    headers: ['h', 'hpp'],
-    sources: ['c', 'cpp', 'cc'],
-    header_dirs: ['.', 'include'],
-    source_dirs: ['.', 'src'],
-}
+:ShimpToggle [open|left|right|top|below]
 ```
 
-To add other extensions/directories, either modify `plugin/shimp.vim` or modify the options after shimp loads (e.g. put something in `after/` or manually modify `g:shimp_options`).
-
-Example:
-```
-vim9script
-# in after/
-g:shimp_options.headers = ['h']
-g:shimp_options.sources->add('cc')
-# etc.
-```
+See `:h shimp` or `:h ShimpToggle` for more info.
 
 ## TODOs
 
-- [ ] split to a window
+- [x] split to a window
