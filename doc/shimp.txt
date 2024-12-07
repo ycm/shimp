@@ -6,7 +6,8 @@ License: MIT License
                                              *:ShimpToggle*
 Jump to source/header.
 
-:ShimpToggle {arg}
+    Usage: :ShimpToggle {arg}
+
     Open window normally, same as :e[dit] {file}: >
         :ShimpToggle open
 <    Other options are:                            >
@@ -29,7 +30,23 @@ Jump to source/header.
             header_dirs: ['.', 'include'],
             source_dirs: ['.', 'src'],
         }
-<    In order to change these, you can manually modify the
-    dict or put something in *after*.
+<    Suppose the cwd is /my/path and the current file is file.c.
+    Then shimp will search in this order:        >
+        /my/path/file.h
+        /my/path/file.hpp
+        /my/path/include/file.h
+        /my/path/include/file.hpp
+        /my/file.h
+        /my/file.hpp
+        /my/include/file.h
+        /my/include/file.hpp
+        /file.h
+        /file.hpp
+        /include/file.h
+        /include/file.hpp
+<
+    As soon as a valid file is found, shimp will jump to it.
+    To change the defaults you can manually modify the dict or
+    put something in after/.
 
 vim:ft=help:norl
