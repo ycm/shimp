@@ -1,12 +1,11 @@
 # shimp
 
-**S**witch between **h**eader and **imp**lementation. Does not care about project structure, code definitions, etc. Just greedily traverses up the path and looks for a matching filename.
+A tiny script that **s**witches between **h**eader and **imp**lementation. Does not care about project structure, code definitions, etc. Just greedily traverses up the path and looks for a matching filename.
 
-## Setup
+## Install
 
 Requires Vim9.
 
-Manually install, or install with any package manager, e.g. ![vim-plug](https://github.com/junegunn/vim-plug):
 ```vim
 Plug 'ycm/shimp'
 ```
@@ -17,8 +16,4 @@ Plug 'ycm/shimp'
 :ShimpToggle [open|left|right|top|below]
 ```
 
-See `:h shimp` for more info.
-
-## TODOs
-
-- [x] split to a window
+Also see `:h shimp`.
