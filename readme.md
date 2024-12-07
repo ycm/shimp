@@ -17,7 +17,7 @@ Plug 'ycm/shimp'
 :ShimpToggle [open|left|right|top|below]
 ```
 
-See `:h shimp` or `:h ShimpToggle` for more info.
+See `:h shimp` for more info.
 
 ## TODOs
 

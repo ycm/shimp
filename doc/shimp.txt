@@ -30,6 +30,6 @@ Jump to source/header.
             source_dirs: ['.', 'src'],
         }
 <    In order to change these, you can manually modify the
-    dict or put something in *after*/.
+    dict or put something in *after*.
 
 vim:ft=help:norl
