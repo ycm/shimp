@@ -7,7 +7,7 @@ vim9script
 if get(g:, 'loaded_shimp', false)
     finish
 endif
-g:loaded_harpy = true
+g:loaded_shimp = true
 
 import autoload '../autoload/shimp.vim'
 
